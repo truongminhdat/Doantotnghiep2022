@@ -46,6 +46,10 @@
                                 <input type="text" class="form-control" name="name" value="{{$user->name}}">
                             </div>
                             <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" name="diachi" value="{{$user->diachi}}">
+                            </div>
+                            <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" class="form-control" name="email" value="{{$user->email}}">
                             </div>
@@ -54,36 +58,44 @@
                                 <input type="text" class="form-control" name="sdt" value="{{$user->sdt}}">
                             </div>
                             <div class="form-group">
+                                <label>Giới tính</label>
+                                <input type="text" class="form-control" name="gioitinh" value="{{$user->gioitinh}}">
+                            </div>
+                            <div class="form-group">
                                 <label>Ngày sinh</label>
-                                <input type="date" class="form-control" name="sdt" value="{{$user->ngaysinh}}">
+                                <input type="date" class="form-control" name="ngaysinh" value="{{$user->ngaysinh}}">
                             </div>
                             <div class="form-group">
-                                <label>Ảnh đại diện</label>
-                                <td>
-                                    <img src="/upload/user/{{$user->Anhdaidien}}" width="120"></td>
+                                <div class="form-group">
+                                    <img src="/upload/user/{{$user->Anhdaidien}}" width="120">
+                                    <input name="Anhbia" value="{{$user->Anhdaidien}}" type="file" class="form-control">
+                                    <label>Ảnh bìa</label>
+                                </div>
 
                             </div>
                             <div class="form-group">
-                                <label>Ảnh bìa</label>
-                                <td>
-                                    <img class="m-auto" src="/upload/user/{{$user->Anhbia}}" width="120" height="120"></td>
-
+                                <div class="form-group">
+                                    <img src="/upload/user/{{$user->Anhbia}}" width="120">
+                                    <input name="Anhbia" value="{{$user->Anhbia}}" type="file" class="form-control">
+                                    <label>Ảnh bìa</label>
+                                </div>
                             </div>
 
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option>Chọn quyền</option>
-                                     @foreach($roles as $data)
+                                <input value="{{$user->role_id}}">
+                                <select class="form-select" name="role_id" aria-label="Default select example">
+                                    @foreach($roles as $data)
                                     <option value="{{$data->id}}">{{$data->name}}</option>
-
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success mt-2">Lưu</button>
+                        <button type="submit">Lưu</button>
+
 
                     </div>
                 </div>

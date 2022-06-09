@@ -18,12 +18,12 @@
                         </div>
                         <div class="price">
                             <p class="datepicker-days"><span>Ngày đăng: </span>{{$dangtin->created_at}}</p>
-                            <span class="like">
-                                <div title="Likes" id="saveLikeDislike" data-type="like" data-post="{{$dangtin->id}}" class="mr-2 btn btn-sm btn-outline-primary d-inline font-weight-bold">
-                                    Like
-                                    <span class="like-count">{{$dangtin->like()}}</span>
-                                </div>
-                            </span>
+{{--                            <span class="like">--}}
+{{--                                <div title="Likes" id="saveLikeDislike" data-type="like" data-post="{{$dangtin->id}}" class="mr-2 btn btn-sm btn-outline-primary d-inline font-weight-bold">--}}
+{{--                                    Like--}}
+{{--                                    <span class="like-count">{{$dangtin->like()}}</span>--}}
+{{--                                </div>--}}
+{{--                            </span>--}}
                             <div class="price">
                                 <h5>Hình ảnh phòng trọ</h5>
                             </div>
@@ -40,18 +40,14 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                         <div class="content single-khach-san">
                             <div class="slider-tour">
-                                <div class="lSSlideOuter noPager"><div class="lSSlideWrapper usingCss"><ul class="imageGallery lightSlider lSSlide" style="width: 690px; transform: translate3d(0px, 0px, 0px); height: 505px; padding-bottom: 0%;">
-                                            <li data-src="{{$dangtin->Hinhanh}}" class="lslide active" style="width: 690px; margin-right: 0px;">
-                                                <img src="upload/dangtin/{{$dangtin->Hinhanh}}" alt="{{$dangtin->Tieude}}" style="height: 505px;">
+                                <div class="lSSlideOuter noPager"><div class="lSSlideWrapper usingCss"><ul class="imageGallery lightSlider lSSlide" style="width: 300px; transform: translate3d(0px, 0px, 0px); height: 505px; padding-bottom: 0%;">
+                                            <li data-src="{{$dangtin->Hinhanh}}" class="lslide active" style="width: 300px; margin-right: 0px;">
+                                                <img src="upload/dangtin/{{$dangtin->Hinhanh}}" alt="{{$dangtin->Tieude}}" style="height: 505px;width: 300px">
                                             </li>
-                                        </ul><div class="lSAction" style="display: none;"><a class="lSPrev"></a><a class="lSNext"></a></div></div><ul class="lSPager lSGallery" style="margin-top: 5px; transition-duration: 400ms; width: 116.333px; transform: translate3d(0px, 0px, 0px);"></ul></div>
+                                        </ul><div class="lSAction" style="display: none;"><a class="lSPrev"></a><a class="lSNext"></a></div></div><ul class="lSPager lSGallery" style="margin-top: 5px; transition-duration: 400ms; width: 100px; transform: translate3d(0px, 0px, 0px);"></ul></div>
                             </div>
-                            <div class="custom-phone">
-                                <div class="button" data-phone="{{$dangtin->sdt}}">Nhấp vào đây để lấy số</div>
-                            </div>
-                            <div class="utility">
-                                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1228209458646183" data-ad-slot="1153677726" data-ad-format="auto" data-full-width-responsive="true"></ins>
-
+                            <div class="form-control btn-primary text-center">
+                              <span class="text-center">{{$dangtin->Sdt}}</span>
                             </div>
                             <div class="utility">
                                 <h3>Thông tin</h3>
@@ -159,11 +155,11 @@
                             <p>Sdt:<span>{{$dangtin->Sdt}}</span></p>
                             <p style="color: red">Người đăng có thể chỉnh sửa bài viết</p>
                         </div>
-                        <div class="text-center" style="margin-top: 40px">
+                        <div class="text-center" style="margin-top: 40px;">
                             @if(\Illuminate\Support\Facades\Auth::user())
-                                <div style="margin-left: 80px" id="rateYo"></div>
+                                <div style="margin-left: 40px" id="rateYo"></div>
                             @else
-                                <div style="margin-left: 80px" id="rateYo1"></div>
+                                <div style="margin-left: 40px" id="rateYo1"></div>
                             @endif
                             <form action="{{route('rating')}}" method="post" class="form-inline" id="formRating">
                                 @csrf

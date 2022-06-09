@@ -57,7 +57,13 @@
                     <td>{{$data->user->name}}</td>
                     <td><img src="/upload/dangtin/{{$data->Hinhanh}}" width="120"></td>
                     <td>{{$data->Dientich}}m<sup>2</sup></td>
-                    <td>Xem</td>
+                    <td>
+                        <a class="btn btn-sm" href="{{route('admin.dangtin.edit',$data->id)}}">
+                            <i class="fas fa-edit">Xem</i>
+                        </a>
+                        @csrf
+                    <td>
+
                 </tr>
             @endforeach
         </table>
@@ -95,14 +101,8 @@
                     $('#notify_dangtin').html(data);
                     $('#notify_dangtin').html('<span class="text text-alert">'+alert+'</span>');
                 }
-
-
-
-
-
             })
         })
-
     </script>
 @endsection
 @section('js')

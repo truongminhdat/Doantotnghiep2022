@@ -61,7 +61,8 @@ class DangtinController extends Controller
 
     public function index(){
         $phuong = Phuong::where('quan_id',0)->get();
-        return view('dangtin.dangtin',compact('phuong'));
+        $dangtin = Dangtin::where('status',1)->get();
+        return view('dangtin.dangtin',compact('phuong','dangtin'));
      }
     public function create(Request $request)
     {
@@ -70,10 +71,13 @@ class DangtinController extends Controller
                 'Diachi'=>'required',
                 'loaiphong_id'=>'required',
                 'phuong_id'=>'required',
-                'soluongphong'=>'required|min:0|max:100'
-            ],[
+                'soluongphong' => 'required|numeric|min:0|not_in:0',
+
+        ],[
                 'Tieude.required'=>'Bạn chưa nhập tiêu đề bài viết',
                 'Diachi.required'=>'Bạn chưa nhập địa chỉ',
+                'soluongphong.required'=>'Bạn chưa nhập số lượng phòng',
+                'soluongphong.numeric'=>'Số lượng phòng phải lớn hơn 0',
                 'soluongphong.min'=>'Số lượng phòng phải lớn hơn 0'
 
 
@@ -88,29 +92,28 @@ class DangtinController extends Controller
             $file_Name = 'noname.jpg';
 
         }
-             $newdangtin = new Dangtin();
-             $newdangtin->Tieude = $request->Tieude;
-             $newdangtin->Diachi = $request->Diachi;
-             $newdangtin->loaiphong_id = $request->loaiphong_id;
-             $newdangtin->phuong_id = $request->phuong_id;
-             $newdangtin->Giaphong = $request->Giaphong;
-             $newdangtin->Dientich = $request->Dientich;
-             $newdangtin->Sdt = $request->Sdt;
-             $newdangtin->soluongphong = $request->soluongphong;
-             $newdangtin->Mota = $request->Mota;
-             $newdangtin->tiennghi = $request->tiennghi;
-             $newdangtin->Hinhanh =$file_Name;
-             $newdangtin->user_id = \auth()->user()->id;
-             $newdangtin->save();
-             return redirect()->route('create')->with('thongbao', 'Bài đã đăng bài và đang chờ duyệt');
-         }
+        $newdangtin = new Dangtin();
+            $newdangtin->Tieude = $request->Tieude;
+            $newdangtin->Diachi = $request->Diachi;
+            $newdangtin->loaiphong_id = $request->loaiphong_id;
+            $newdangtin->phuong_id = $request->phuong_id;
+            $newdangtin->Giaphong = $request->Giaphong;
+            $newdangtin->Dientich = $request->Dientich;
+            $newdangtin->Sdt = $request->Sdt;
+            $newdangtin->soluongphong = $request->soluongphong;
+            $newdangtin->Mota = $request->Mota;
+            $newdangtin->tiennghi = $request->tiennghi;
+            $newdangtin->Hinhanh =$file_Name;
+            $newdangtin->user_id = \auth()->user()->id;
+            $newdangtin->save();
+            return redirect()->route('create')->with('thongbao', 'Bài đã đăng bài và đang chờ duyệt');
+    }
     public function getupdatenguoidung($id){
         $dangtin = Dangtin::where('id',$id)->first();
-//        $user = Auth::user()->id;
         return view('dangtin.trangcapnhat',compact('dangtin',));
     }
     public function updatedangtin(Request $request,$id){
-            $updatedangtin = Dangtin::find($id);
+        $updatedangtin = Dangtin::find($id);
         $updatedangtin->Tieude = $request->input('Tieude');
         $updatedangtin->Diachi = $request->input('Diachi');
         $updatedangtin->loaiphong_id = $request->input('loaiphong_id');
@@ -134,6 +137,21 @@ class DangtinController extends Controller
             }
             $updatedangtin->update();
             return redirect()->back()->with('thongbao','Bạn đã cập nhật thành công');
+        }
+        public function searchDangtin(Request $request)
+        {
+            $quan = DB::table('quans')->get();
+            $loaitin = DB::table('loaiphongs')->get();
+            $dangtin = DB::table('dangtins')->get();
+            if ($request->quan) {
+                $result = Dangtin::where('quan_id', 'LIKE', '%' . $request->quan . '%')->get();
+                if ($request->loaiphong_id) {
+                    $result = Dangtin::where('loaiphong_id', 'LIKE', '%' . $request->loaiphong_id);
+                }
+
+                return view('dangtin.dangtin', compact('quan', 'dangtin', 'result'));
+
+            }
         }
 
 }

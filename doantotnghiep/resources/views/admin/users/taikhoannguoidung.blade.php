@@ -30,8 +30,6 @@
             </span>
 
         @endif
-
-
         <table class="table table-bordered">
             <tr>
                 <th>Duyệt</th>
@@ -45,6 +43,7 @@
                 <th>Ảnh bìa</th>
             </tr>
             @foreach ($user as $data)
+                @if($data->role_id == 2)
                 <tr>
                     <td>
                         @if($data->status == 1 )
@@ -67,13 +66,15 @@
                     <td><img  src="/upload/user/{{ $data->Anhbia}}" width="120" alt=""></td>
 
                 </tr>
+                @else
+                @endif
             @endforeach
         </table>
 
         <nav aria-label="Page navigation ">
             <nav aria-label="Page navigation example">
-                {!! $user->links()!!}
                 </li>
+                {{$user->links()}}
                 </ul>
 
             </nav></nav>

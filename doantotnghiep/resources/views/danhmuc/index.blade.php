@@ -50,7 +50,7 @@
 
                                         <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                             <div class="d-flex flex-row align-items-center mb-1">
-                                                <span class="money-giaphong">{{number_format($dangtin->Giaphong)}}vnđ</span>
+                                                <span class="money-giaphong"> {{($dangtin->Giaphong)}}vnđ</span>
                                             </div>
                                             <h6 class="text-success">{{$dangtin->Mota}}</h6>
                                             @if($dangtin->soluongphong > 0)
@@ -79,7 +79,7 @@
                     <ul class="list-group">
                         <li class="list-group-item active" aria-current="true">Danh sách các loại phòng</li>
                         @foreach($loaiphong as $data)
-                            <li class="list-group-item"><a href="#">{{$data->Tenloaiphong}}</a></li>
+                            <li class="list-group-item"><a href="{{route('trangchu.trochothue',$data->id)}}">{{$data->Tenloaiphong}}</a></li>
                         @endforeach
                     </ul>
                     <ul class="list-group mt-5">

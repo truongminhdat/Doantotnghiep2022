@@ -73,7 +73,7 @@
                     <ul class="list-group">
                         <li class="list-group-item active" aria-current="true">Danh sách các loại phòng</li>
                         @foreach($loaiphong as $data)
-                            <li class="list-group-item"><a href="#">{{$data->Tenloaiphong}}</a></li>
+                            <li class="list-group-item"><a href="{{route('trangchu.trochothue',$data->id)}}">{{$data->Tenloaiphong}}</a></li>
                         @endforeach
                     </ul>
                     <ul class="list-group mt-5">

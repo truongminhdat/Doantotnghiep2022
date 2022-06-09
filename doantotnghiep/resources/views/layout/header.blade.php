@@ -13,7 +13,7 @@
 
                     <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                         <li><a href="{{route('trangchu')}}" class="nav-link">Trang chủ</a></li>
-                        <li class="has-children"><a href="#" class="nav-link">Loại Phòng</a>
+                        <li class="has-children"><a href="{{route('trangchu')}}" class="nav-link">Loại Phòng</a>
                             <ul class="dropdown arrow-top">
                                 @foreach($loaiphong as $data)
                                 <li><a href="{{route('trangchu.trochothue',$data->id)}}" class="nav-link">{{$data->Tenloaiphong}}</a></li>
@@ -21,23 +21,15 @@
 
                             </ul>
                         </li>
-                        <li class="has-children"><a href="#" class="nav-link">Phòng trọ</a>
-                            <ul class="dropdown arrow-top">
-                                @foreach($phuong as $data )
-                                    <li><a href="{{route('trangchu.phongtro',$data->id)}}" class="nav-link">{{$data->TenPhuong}}</a></li>
-                                @endforeach
-
-                            </ul>
-                        </li>
                         <li><a href="#" class="nav-link">Liên hệ</a></li>
 
                         @if(Auth::user())
+                       <li><a href="{{route('dangtin')}}" class="nav-link">Đăng tin</a></li>
                         <li class="has-children">
-                            <a href="#about-section" class="nav-link"><i class="icon-user"></i>{{Auth::user()->name}}</a>
+                            <a href="{{route('nguoidung')}}" class="nav-link"><i class="icon-user"></i>{{Auth::user()->name}}</a>
                             <ul class="dropdown arrow-top">
                                 <li><a href="{{route('nguoidung')}}" class="nav-link">Thông tin người dùng</a></li>
                                 <li><a href="{{route('logout')}}" class="nav-link">Đăng xuất</a></li>
-                                <li><a href="{{route('dangtin')}}" class="nav-link">Đăng tin</a></li>
                             </ul>
                         </li>
                         @else

@@ -86,27 +86,24 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
 
     Route::get('/dangtin',[\App\Http\Controllers\Admin\DangtinController::class,'index'])->name('dangtin');
     Route::post('duyetbaidang',[\App\Http\Controllers\Admin\DangtinController::class,'duyetbaidang']);
-
-    Route::get('binhluan',[BinhluanController::class,'index'])->name('binhluan');
-
+    Route::get('/dangtin/edit/{id}',[\App\Http\Controllers\Admin\DangtinController::class,'edit'])->name('dangtin.edit');
+    Route::get('/comment/dangtin/{id}',[\App\Http\Controllers\Admin\DangtinController::class,'destroy'])->name('dangtin.destroy');
     Route::get('taikhoannguoidung',[UserController::class,'index'])->name('taikhoan');
     Route::post('duyettaikhoan',[UserController::class,'duyettaikhoan']);
     Route::get('/taikhoannguoidung/edit/{user}',[UserController::class,'edit'])->name('user.edit');
     Route::post('taikhoannguoidung/update/{user}',[UserController::class,'update'])->name('user.update');
+    Route::get('profile',[UserController::class,'profile']);
+    Route::post('profile/update/{user}',[UserController::class,'updateprofile'])->name('profile.update');
+    Route::get('getupdatepassword',[UserController::class,'getupdatepassword'])->name('password');
+    Route::post('postupdatepassword',[UserController::class,'updatepassword'])->name('updatepassword');
 
     Route::get('loaiphong',[LoaiPhongController::class,'index'])->name('loaiphong');
     Route::get('loaiphong/create',[LoaiPhongController::class,'create'])->name('loaiphong.create');
     Route::post('loaiphong/store',[LoaiPhongController::class,'store'])->name('loaiphong.store');
     Route::post('loaiphong/destroy/{id}',[LoaiPhongController::class,'destroy'])->name('loaiphong.destroy');
-    Route::get('role',[\App\Http\Controllers\Admin\RoleController::class,'index'])->name('role');
-    Route::get('/role/create',[\App\Http\Controllers\Admin\RoleController::class,'create'])->name('role.create');
-    Route::post('/role/store',[\App\Http\Controllers\Admin\RoleController::class,'store'])->name('role.store');
-    Route::get('/role/edit/{id}',[\App\Http\Controllers\Admin\RoleController::class,'edit'])->name('role.edit');
-    Route::post('role/update/{id}',[\App\Http\Controllers\Admin\RoleController::class,'update'])->name('role.update');
-    Route::get('admin/role/destroy/{id}',[\App\Http\Controllers\Admin\RoleController::class,'destroy'])->name('role.destroy');
-
 
     Route::get('/thongke',[\App\Http\Controllers\Admin\ThongkeController::class,'index'])->name('thongke.index');
+    Route::get('/thongkenguoidung',[\App\Http\Controllers\Admin\ThongkeController::class,'thongkenguoidung'])->name('thongke.danhsach');
 
 });
 
@@ -132,8 +129,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
     Route::get('getupdatepassword',[PagesController::class,'getupdatepassword'])->name('password');
     Route::post('postupdatepassword',[PagesController::class,'updatepassword'])->name('updatepassword');
 
-    Route::get('forgotpassword',[PagesController::class,'forgetPass']);
-    Route::post('forgotpassword',[PagesController::class,'postforgetPass'])->name('forgetPass');
+    Route::get('forgotpassword',[PagesController::class,'showForgotPasswordForm']);
+    Route::post('forgotpassword',[PagesController::class,'submitForgotPasswordForm'])->name('forgetPass');
+    Route::get('resetpassword/{token}',[PagesController::class,'showResetPasswordForm'])->name('resetpassword');
+    Route::post('updateresetpassword',[PagesController::class,'submitResetPasswordForm'])->name('updateresetpassword');
 
 
     Route::post('comment/{id}',[CommentController::class,'comment'])->name('comment');
@@ -145,15 +144,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
     Route::get('dangtin/capnhatdangtin/{id}',[DangtinController::class,'getupdatenguoidung'])->name('capnhat.dangtin');
     Route::post('dangtin/capnhatdangtin/{id}',[DangtinController::class,'updatedangtin'])->name('update.dangtin');
 
+
+
 Route::get('send-email',[\App\Http\Controllers\SendMailController::class,'sendmail']);
 
-//Route::get('3',function (){
-//    $result = App\Models\User::find(1)->Dangtin->toArray();
-//    echo '<pre>';
-//    print_r($result);
-//});
-//Route::get('4',function (){
-//    $result = App\Models\Duong::find(1)->dangtin->toArray();
-//    echo '<pre>';
-//    print_r($result);
-//});

@@ -29,4 +29,14 @@ class ThongkeController extends Controller
             'title'=>'Thống kê danh sách trong admin',
         ],compact('user_count','product_count','dangtin','comment_count','user'));
     }
+    public function thongkenguoidung(){
+        $dangtin = Dangtin::where('status',1)->get();
+        $user = User::all();
+        if (request()->date_from && request()->date_to){
+            $dangtin = Dangtin::where('status',1)->whereBetween('created_at',[request()->date_from,request()->date_to])->get();
+        }
+        return view('admin.thongke.thongkenguoidung',[
+            'title'=>'Thống kê danh sách người dùng',
+        ],compact('dangtin','user'));
+    }
 }

@@ -54,9 +54,10 @@ class PagesController extends Controller
     }
 
    public function trangchu(){
-       return view('pages.home');
+        $dangtin = Dangtin::where('status','1')->get();
+        return view('pages.home',compact('dangtin'));
+       }
 
-    }
 
        public  function  showRegister(){
        return view('pages.dangki');
@@ -156,15 +157,15 @@ class PagesController extends Controller
         if ($dataUser->status == 1){
             return redirect('dangnhap')->with('thongbao','Tài khoản đã bị khóa');
         }
-
-        if (Auth::attempt($arr))
-        {
-            return redirect('trangchu');
+        if($dataUser->role_id == 2){
+            if (Auth::attempt($arr))
+            {
+                return redirect('trangchu');
+            }
+            else{
+                return redirect('dangnhap')->with('thongbao','Tài khoản đã bị khóa hoặc chưa đăng kí vui lòng kiểm tra lại');
+            }
         }
-        else{
-            return redirect('dangnhap')->with('thongbao','Tài khoản đã bị khóa hoặc chưa đăng kí vui lòng kiểm tra lại');
-        }
-
     }
     public function logout(){
        Auth::logout();
@@ -238,34 +239,70 @@ class PagesController extends Controller
 
            return redirect()->back()->with("success","Thay đổi password thành công!!");
        }
-       public function forgetPass(){
-        return view('user.forgetpass');
-       }
-       public function postforgetPass(Request $request)
-       {
-           $request->validate([
-               'email'=>'required|exists:users'
-           ],[
-               'email.required'=>'Vui lòng nhập email hợp lệ',
-               'email.exists'=>'Email này không tồn tại trong hệ thống'
-           ]);
-           dd($request->all());
-//           $token = Str::random();
-//           $user = User::where('email',$request->email)->first();
-//           $user->update(['token'=>$token]);
-//           Mail::send('mail.mail',compact('user'),function ($email) use ($user){
-//            $email->subject('Web quản lí trọ- Lấy lại mật khẩu tài khoản');
-//            $email->to($user->email,$user->name);
-//            return redirect()->back('dangnhap')->with('success','Vui lòng check mail để check mâ');
-//           });
-       }
 
-       public function  getPass(User $user,$token){
-        if ($user->token === $token){
-            return view('mail.mail');
+    public function showForgotPasswordForm()
+    {
+        return view('user.forgetpass');
+    }
+
+    /**
+     * Quên mật khẩu
+     * @param $request
+     * @return $message
+     */
+    public function submitForgotPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users',
+        ]);
+
+        $token = Str::random(64);
+
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+        $to_email =  $request->email;
+        Mail::send('mail.mail', ['token' => $token], function($message) use($to_email){
+            $message->to($to_email)->subject('Mail từ hệ thống !');
+            $message->from($to_email,"Veryfying Resset Mail");
+        });
+
+        return back()->with('message', 'Vui lòng kiểm tra mail của bạn');
+    }
+
+    public function showResetPasswordForm($token) {
+        return view('user.getPass', ['token' => $token]);
+    }
+
+
+    public function submitResetPasswordForm(Request $request)
+    {
+        //   dd($request->all());
+        $request->validate([
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_resets')
+            ->where(
+                'token' , $request->token_reset
+            )
+            ->first();
+
+        // dd($updatePassword);
+        if(!$updatePassword){
+            return back()->withInput()->with('error', 'Invalid token!');
         }
-        return  abort(404);
-       }
+
+        $user = User::where('email', $updatePassword->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+
+        return redirect('dangnhap')->with('success', 'Mật khẩu của bạn đã được thay đổi');
+    }
 
 
 

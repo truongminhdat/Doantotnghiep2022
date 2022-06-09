@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group">
                             <label>Số lượng phòng</label>
-                            <input name="soluongphong" type="text" class="form-control" placeholder="Nhập số lượng phòng"/>
+                            <input name="soluongphong" type="number" class="form-control" placeholder="Nhập số lượng phòng"/>
                             @if($errors->has('soluongphong'))
                                 {{$errors->first('soluongphong')}}
                             @endif

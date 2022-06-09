@@ -7,7 +7,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info">
-                <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                <a href="{{url('http://localhost:8000/admin/profile')}}" class="d-block"><img style="width: 50px;height: 50px;border-radius: 50%" src="/upload/user/{{\Illuminate\Support\Facades\Auth::user()->Anhdaidien}}">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
             </div>
         </div>
 
@@ -61,13 +61,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admin.quan.create')}}" class="nav-link">
+                            <a href="{{url('http://localhost:8000/admin/quan/create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thêm Quận</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.quan')}}" class="nav-link">
+                            <a href="{{url('http://localhost:8000/admin/quan')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách Quận</p>
                             </a>
@@ -84,13 +84,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{url('http://localhost:8000/admin/phuong/create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thêm Phường</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.phuong')}}" class="nav-link">
+                            <a href="{{url('http://localhost:8000/admin/phuong')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách Phường</p>
                             </a>
@@ -109,28 +109,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/dangtin" class="nav-link">
+                            <a href="{{url('/admin/dangtin')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách bài đăng</p>
-                            </a>
-                        </li>
-
-
-
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cart-plus"></i>
-                        <p>Quản lý Bình luận
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/binhluan" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách Bình Luận</p>
                             </a>
                         </li>
 

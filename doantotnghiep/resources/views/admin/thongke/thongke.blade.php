@@ -77,6 +77,15 @@
                     <div class="form-group mr-2">
                         <input type="date" class="form-control" name="date_to">
                     </div>
+                    <div class="col-md-2">
+                        <select class="dashboard-filter form-control">
+                        <option>--Chọn--</option>
+                        <option value="7ngay">--7 ngày--</option>
+                        <option value="thangtruoc">--Tháng trước--</option>
+                        <option value="thangnay">--Tháng này--</option>
+                        <option value="365 ngày qua">--365 ngày qua--</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Button</button>
                 </form>
             </div>
@@ -153,3 +162,17 @@
 
          </div>
 @endsection
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dashboard-filter').change(function () {
+                var dashboard_value = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                alert(dashboard_value);
+            })
+
+        })
+
+    </script>
+@endsection
+

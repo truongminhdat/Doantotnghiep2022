@@ -17,11 +17,17 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next)
     {
+//        if (Auth::user()->role_id == 1){
+//            return redirect()->route('admin.login');
+//        }
+//        else{
+//            return redirect()->route('dangnhap');
+//        }
        if(!Auth::check()){
            return redirect()->route('admin.login');
        }
-        $user = Auth::user();
-       $route = $request->route()->getName();
+//        $user = Auth::user();
+//       $route = $request->route()->getName();
 //        if($user->cant($route)){
 //            return redirect()->route('admin.error',['code'=>403]);
 //        }
