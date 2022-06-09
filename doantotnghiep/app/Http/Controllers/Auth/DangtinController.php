@@ -38,9 +38,10 @@ class DangtinController extends Controller
     public function trangchitiet($id){
         $grate = Danhgia::where('dangtin_id',$id)->avg('grate');
         $grate   = round($grate);
+        $grate_count = Danhgia::count();
         $dangtin = Dangtin::where('id',$id)->first();
         $user = Auth::user();
-         return view('dangtin.trangchitiet',compact('dangtin','grate','user'));
+         return view('dangtin.trangchitiet',compact('dangtin','grate','user','grate_count'));
     }
     public function rating(Request $request){
         $model = Danhgia::where($request->only('user_id','dangtin_id'))->first();
