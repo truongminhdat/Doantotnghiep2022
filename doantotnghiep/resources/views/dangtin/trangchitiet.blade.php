@@ -180,7 +180,7 @@
 
                                 </li>
                             </ul>
-                            <p style="color: red"><span>{{$grate_count}}</span> lượt đánh giá</p>
+                            <p style="color: red"><span>{{$grate_count}}</span> lượt bình luận</p>
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user())
                         @if($dangtin->user_id == auth()->user()->id )

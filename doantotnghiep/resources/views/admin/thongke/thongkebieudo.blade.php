@@ -70,7 +70,7 @@
             </div>
 
         </div>
-        <div class="panel-default "cd>
+        <div class="panel-default ">
             <p>Thống kê các danh sách đã duyệt</p>
             <div class="panel-body">
                 <form action="" method="GET" class="form-inline" role="from">
