@@ -30,16 +30,29 @@
             </span>
 
         @endif
+        <form action="" class="form-inline">
+            <div class="form-group">
+                <input class="form-control" name="key" placeholder="Tìm kiếm.."/>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
 
 
-        <table class="table table-bordered">
+
+        <table class="table table-bordered mt-5">
             <tr>
-                <th>Duyệt</th>
+                <th>Duyệt
                 <th>Tiêu đề</th>
+                <th>Địa chỉ</th>
                 <th>Giá</th>
                 <th>Người đăng</th>
                 <th>Ảnh</th>
                 <th>Diện tích</th>
+                <th>Số lượng phòng</th>
+                <th>Ngày đăng</th>
+                <th>Tình trạng</th>
                 <th>Hành động</th>
             </tr>
             @foreach ($dangtin as $data)
@@ -47,30 +60,39 @@
 
                     <td>
                         @if($data->status == 1 )
-                            <input type="button" data-status="0" id="{{$data->id}}" class="btn btn-danger duyet_btn" value="Đã duyệt">
+                            <input type="button" data-status="0" id="{{$data->id}}" class="btn btn-danger duyet_btn" value="Bỏ duyệt">
                         @else
-                            <input type="button" data-status="1" id="{{$data->id}}" class="btn btn-primary duyet_btn" value="Duyệt">
+                            <input type="button" data-status="1" id="{{$data->id}}" class="btn btn-success duyet_btn" value="Duyệt">
                         @endif
                     </td>
                     <td>{{ $data->Tieude }}</td>
+                    <td>{{$data->Diachi}}</td>
                     <td>{{($data->Giaphong)}}vnđ</td>
                     <td>{{$data->user->name}}</td>
                     <td><img src="/upload/dangtin/{{$data->Hinhanh}}" width="120"></td>
                     <td>{{$data->Dientich}}m<sup>2</sup></td>
+                    <td>{{$data->soluongphong}}</td>
+                    <td>{{$data->created_at}}</td>
+                    <td>
+                       @if($data->status == 0)
+                          <span style="color: red">Chưa duyệt</span>
+                        @else
+                           <span style="color: #0c84ff">Đã duyệt</span>
+
+                        @endif
+                    </td>
                     <td>
                         <a class="btn btn-sm" href="{{route('admin.dangtin.edit',$data->id)}}">
                             <i class="fas fa-edit">Xem</i>
                         </a>
-                        @csrf
-                    <td>
-
+                    @csrf
                 </tr>
             @endforeach
         </table>
 
         <nav aria-label="Page navigation ">
             <nav aria-label="Page navigation example">
-                {!! $dangtin->links()!!}
+                {{ $dangtin->appends(request()->all())->links()}}
                 </li>
                 </ul>
 
@@ -83,10 +105,10 @@
             var status = $(this).data('status');
             var id = $(this).attr('id');
             if(status == 0){
-                var alert = 'Duyệt không thành công';
+                var alert = 'Bạn đã bỏ duyệt ';
             }
             else {
-                var alert = 'Duyệt thành công'
+                var alert = 'Bạn đã duyệt bài đăng'
             }
 
             $.ajax({
@@ -99,7 +121,7 @@
                data:{status:status,id:id},
                 success:function(data) {
                     $('#notify_dangtin').html(data);
-                    $('#notify_dangtin').html('<span class="text text-alert">'+alert+'</span>');
+                    $('#notify_dangtin').html('<span class="alert alert-default-primary">'+alert+'</span>');
                 }
             })
         })

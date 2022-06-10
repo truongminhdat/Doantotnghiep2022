@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Roles;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -25,10 +25,9 @@ class UserController extends Controller
         $user->save();
     }
     public function edit(User $user){
-        $roles = Roles::all();
         return view('admin.users.edit',[
             'title'=>'Chỉnh sửa tài khoản'
-        ],compact('user','roles'));
+        ],compact('user'));
 
     }
     public function update(Request $request,$id){

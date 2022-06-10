@@ -43,4 +43,10 @@ class Dangtin extends Model
     public function danhgia(){
         return $this->hasMany(Danhgia::class);
     }
+    public function scopeSearch($query){
+        if ($key = request()->key){
+            $query = $query->where('Tieude','like','%'.$key.'%');
+        }
+        return $query;
+    }
 }

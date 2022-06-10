@@ -88,6 +88,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
     Route::post('duyetbaidang',[\App\Http\Controllers\Admin\DangtinController::class,'duyetbaidang']);
     Route::get('/dangtin/edit/{id}',[\App\Http\Controllers\Admin\DangtinController::class,'edit'])->name('dangtin.edit');
     Route::get('/comment/dangtin/{id}',[\App\Http\Controllers\Admin\DangtinController::class,'destroy'])->name('dangtin.destroy');
+    Route::get('/dangtin/search',[DangtinController::class,'searchDangtin']);
+
+
     Route::get('taikhoannguoidung',[UserController::class,'index'])->name('taikhoan');
     Route::post('duyettaikhoan',[UserController::class,'duyettaikhoan']);
     Route::get('/taikhoannguoidung/edit/{user}',[UserController::class,'edit'])->name('user.edit');
@@ -104,6 +107,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
 
     Route::get('/thongke',[\App\Http\Controllers\Admin\ThongkeController::class,'index'])->name('thongke.index');
     Route::get('/thongkenguoidung',[\App\Http\Controllers\Admin\ThongkeController::class,'thongkenguoidung'])->name('thongke.danhsach');
+    Route::get('/thongkebieudo',[\App\Http\Controllers\Admin\ThongkeController::class,'thongkebieudo'])->name('thongke.danhsach');
 
 });
 
@@ -111,7 +115,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin'],'as'=>'admin.'],f
 //Route::group(['middleware'=>'auth'],function () {
 
     Route::get('trangchu',[PagesController::class,'trangchu'])->name('trangchu');
-
     Route::get('dangky',[PagesController::class,'showRegister'])->name('show-register');
     Route::post('dangky',[PagesController::class,'register'])->name('register');
     Route::get('dangnhap',[PagesController::class,'getDangnhap'])->name('show-login');

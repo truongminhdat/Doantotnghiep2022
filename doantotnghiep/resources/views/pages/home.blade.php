@@ -5,6 +5,11 @@
 @section('content')
     @include('layout.slide')
     @include('pages.search')
+    <div style="background-color: #eee;">
     @include('dangtin.trangdangtin')
+     <div class="container mr-lg-1" style="text-align: center"
+    {{$dangtin->links()}}
+    </div>
+     </section>
 @endsection
 

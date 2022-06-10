@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Dangtin;
 use App\Models\Danhgia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Constraint\Count;
 
@@ -13,7 +14,7 @@ class DangtinController extends Controller
 {
     public function index()
     {
-        $dangtin = Dangtin::paginate(10);
+        $dangtin = Dangtin::orderBy('created_at','DESC')->search()->paginate(3);
         return view('admin.dangtin.dangtin', [
             'title' => 'Quản lí Đăng tin'
         ], compact('dangtin'));
@@ -45,6 +46,20 @@ class DangtinController extends Controller
         $comment = Comment::find($id);
         $comment->delete();
         return redirect()->route('admin.dangtin')->with('thongbao','Xóa thành công');
+
+    }
+    public function search(Request $request){
+        $output = '';
+        $dangtin = Dangtin::where('Tieude','LIKE','%'.$request->keyword.'%')->get();
+        foreach ($dangtin as $dangtin){
+            $output = '<tr>
+                     <td>'.$dangtin->Tieude.'</td>
+                    <td>'.$dangtin->Diachi.'</td>
+                    <td>'.$dangtin->Giaphong.'</td>
+                    <td>'.$dangtin->user->name.'</td>
+                       </tr>';
+        }
+        return response()->json($output);
 
     }
 }

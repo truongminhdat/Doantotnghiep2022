@@ -70,7 +70,4 @@ class User extends Authenticatable
       }
         return $data;
   }
-  public function getRoles(){
-        return $this->belongsToMany(Roles::class,'user_roles','user_id','role_id');
-  }
-}
+ }

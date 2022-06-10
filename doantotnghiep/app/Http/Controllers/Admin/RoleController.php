@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Roles;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $data = Roles::paginate(15);
+        $data = Role::paginate(15);
         return view('admin.role.index',[
             'title'=>'Quản lý Phân Quyền'
         ],compact('data'));
@@ -58,7 +58,7 @@ class RoleController extends Controller
             'name.required'=>'Tên nhóm quyền không để trống'
         ]);
         $routes = json_encode($request->route);
-        $role = new Roles();
+        $role = new Role();
         $role->name = $request->name;
         $role->permissions = $routes;
         $role->save();
@@ -69,10 +69,10 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  \App\Models\Role  $roles
      * @return \Illuminate\Http\Response
      */
-    public function show(Roles $roles)
+    public function show(Role $roles)
     {
         //
     }
@@ -80,12 +80,12 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  \App\Models\Role  $roles
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-       $model = Roles::find($id);
+       $model = Role::find($id);
        $permissions = json_decode($model->permissions);
        $routes = [];
                $all = Route::getRoutes();
@@ -105,7 +105,7 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Roles  $roles
+     * @param  \App\Models\Role  $roles
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -116,7 +116,7 @@ class RoleController extends Controller
             'name.required'=>'Tên nhóm quyền không được để trống'
         ]);
         $routes = json_encode($request->route);
-        $roles = Roles::find($id);
+        $roles = Role::find($id);
         $roles->name = $request->name;
         $roles->permissions = $routes;
         $roles->update();
@@ -126,10 +126,10 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Roles  $roles
+     * @param  \App\Models\Role  $roles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Roles $roles)
+    public function destroy(Role $roles)
     {
         //
     }

@@ -87,11 +87,6 @@
                             <div class="form-group">
                                 <label>Name</label>
                                 <input value="{{$user->role_id}}">
-                                <select class="form-select" name="role_id" aria-label="Default select example">
-                                    @foreach($roles as $data)
-                                    <option value="{{$data->id}}">{{$data->name}}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
                         <button type="submit">Lưu</button>

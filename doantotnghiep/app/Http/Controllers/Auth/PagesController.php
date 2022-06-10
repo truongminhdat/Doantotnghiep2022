@@ -52,9 +52,9 @@ class PagesController extends Controller
         view()->share('user',$user);
         view()->share('loaiphong',$loaiphong);
     }
-
    public function trangchu(){
-        $dangtin = Dangtin::where('status','1')->get();
+
+        $dangtin = Dangtin::where('status','1')->orderBy('created_at','DESC')->paginate(5);
         return view('pages.home',compact('dangtin'));
        }
 

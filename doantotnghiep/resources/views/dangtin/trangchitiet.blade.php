@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                        <div class="text-center borderexam1">
+                        <div class="text-center borderexam1 ">
                             <p>Người đăng:
                                 <span>{{$dangtin->user->name}}</span>
                             </p>
@@ -171,6 +171,16 @@
                                 </div>
                             </form>
 
+                        </div>
+
+                        <div class="text-center borderexam1 mt-5">
+                            <ul class="list-inline" title="Average Rating">
+                                <li title="danhgiasao" class="rating" style="cursor: pointer;color:#cccc77;font-size:30px">
+                                    {{$grate}}&#9733
+
+                                </li>
+                            </ul>
+                            <p style="color: red"><span>{{$grate_count}}</span> lượt đánh giá</p>
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user())
                         @if($dangtin->user_id == auth()->user()->id )

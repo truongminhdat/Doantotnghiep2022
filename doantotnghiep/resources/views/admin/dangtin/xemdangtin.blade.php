@@ -19,73 +19,79 @@
                     <div class="col-md-6">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Bài Đăng</strong>-
+                                <strong>Bài Đăng: </strong>
                                 <span>{{$dangtin->Tieude}}</span>
                             </div>
                         </div>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Địa chỉ</strong>
-                                <span>:{{$dangtin->Diachi}}</span>
+                                <strong>Địa chỉ :</strong>
+                                <span>{{$dangtin->Diachi}}</span>
                             </div>
                         </div>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Giá phòng</strong>
-                                <span>:{{$dangtin->Giaphong}}vnđ</span>
+                                <strong>Giá phòng:</strong>
+                                <span>{{$dangtin->Giaphong}}vnđ</span>
                             </div>
                         </div>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Diện tích</strong>
-                                <span>:{{$dangtin->Dientich}}</span>m<sup>2</sup>
+                                <strong>Diện tích:</strong>
+                                <span>{{$dangtin->Dientich}}</span>m<sup>2</sup>
                             </div>
                         </div>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Hình ảnh</strong>
+                                <strong>Hình ảnh:</strong>
                                 <br>
                                 <img src="/upload/dangtin/{{$dangtin->Hinhanh}}" style="width: 300px" >
                             </div>
                         </div>
+                        <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Mô tả</strong>
-                                <span>:{{$dangtin->Mota}}</span>
+                                <strong>Mô tả:</strong>
+                                <span>{{$dangtin->Mota}}</span>
                             </div>
                         </div>
+                        <hr>
 
                     </div>
                     <div class="col-md-6">
 
                             <div class="form-group">
-                                <strong>Người đăng</strong>
-                                <span>{{$dangtin->user->name }}</span>
+                                <strong>Người đăng:</strong>
+                                <span style="color: red">{{$dangtin->user->name }}</span>
                             </div>
+                        <hr>
                         <div class="form-group">
-                            <strong>Loại Hình</strong>
+                            <strong>Loại Hình:</strong>
                             <span>{{$dangtin->loaiphong->Tenloaiphong }}</span>
                         </div>
+                        <hr>
                         <div class="form-group">
-                            <strong>Số điện thoại</strong>
-                            <span>:{{$dangtin->Sdt}}</span>
+                            <strong>Số điện thoại:</strong>
+                            <span style="color: #074f07;">{{$dangtin->Sdt}}</span>
                         </div>
+                        <hr>
                         <div class="form-group">
-                            <strong>Loại Hình</strong>
-                            <span>:{{$dangtin->loaiphong->Tenloaiphong }}</span>
+                            <strong>Loại Hình :</strong>
+                            <span style="color: #00bb00">{{$dangtin->loaiphong->Tenloaiphong }}</span>
                         </div>
+                        <hr>
                         <div class="form-group">
-                            <strong>Số điện thoại</strong>
-                            <span>:{{$dangtin->Sdt}}</span>
-
+                            <strong>Số bình luận :</strong>
+                            <span>{{$comment}}</span>
                         </div>
+                        <hr>
                         <div class="form-group">
-                            <strong>Số bình luận</strong>
-                            <span>:{{$comment}}</span>
-                        </div>
-                        <div class="form-group">
-                            <strong>Số sao đánh giá bình luận</strong>
-                            <span>:{{$grate}}</span>
+                            <strong>Điểm đánh giá:</strong>
+                            <span>{{$grate}}</span><i class="fa fa-star" style="color: yellow"></i>
                         </div>
                     </div>
                 </div>
